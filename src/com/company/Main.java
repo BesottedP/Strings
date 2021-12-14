@@ -33,21 +33,78 @@ public class Main {
         return E;
     }
 
-//    public static String convertDate2(String m){
-//        int a = m.indexOf("/");
-//        int b = m.lastIndexOf("/");
-//        String c = m.substring(a,b+1);
-//
-//        if(c.length() == 1){
-//            String d = "0" + c.substring(0, 1);
-//            return d;
-//        }
-//        else{
-//            return "broke";
-//        }
-//    }
+    public static String convertDate2(String m){
 
-    public static boolean startsWith(String s, String P)
+        String NewDate =  "";
+
+        int a = m.indexOf("/");
+        int b = m.lastIndexOf("/");
+        int length = m.length();
+
+        String month = m.substring(0,a);
+        String day = m.substring(a+1,b);
+
+        int mlength = month.length();
+        int dlength = day.length();
+
+        if(dlength == 1){
+            NewDate += "0" + day;
+        }
+        else{
+            NewDate = day;
+        }
+
+        if(mlength == 1){
+            NewDate += "0" + month;
+        }
+        else{
+            NewDate += month;
+        }
+
+
+        return NewDate;
+
+    }
+
+    public static boolean startsWith(String s, String P){
+        int l = s.length();
+        for(int i = 0; i<=l; i++){
+            String t = s.substring(0,i);
+            if(t.equalsIgnoreCase(P)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean endsWith(String s, String suf){
+        int l = s.length();
+        for(int i = 0; i<=l; i++){
+            String t = s.substring(0+i,l);
+            if(t.equalsIgnoreCase(suf)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String removeTag(String s, String t){
+        String t1 = "<" + t + ">";
+        String t2 = "</" + t + ">";
+        if(s.contains(t1) && s.contains(t2)) {
+            if(s.indexOf(t1) < s.indexOf(t2)){
+                int L1 = t1.length();
+                int ti1 = s.indexOf(t1);
+                int ti2 = s.indexOf(t2);
+                return s.substring(ti1 + L1, ti2);
+            }
+            else return s;
+        }
+        else return s;
+    }
+
+
+
     public static void main(String[] args) {
         System.out.println(scroll("Hello World"));
         System.out.println(scroll("happy"));
@@ -68,6 +125,39 @@ public class Main {
 
         System.out.println("");
 
-//        System.out.println("04/2/2014 becomes" + convertDate2("04/2/2014"));
+        System.out.println("04/20/2014 becomes" + convertDate2("04/20/2014"));
+        System.out.println("4/20/2014 becomes" + convertDate2("4/20/2014"));
+        System.out.println("04/2/2014 becomes" + convertDate2("04/2/2014"));
+        System.out.println("4/2/2014 becomes" + convertDate2("4/2/2014"));
+
+        System.out.println(" ");
+
+        System.out.println("\nstartsWith");
+        System.out.println(startsWith("architecture", "arch"));
+        System.out.println(startsWith("architecture", "a"));
+        System.out.println(startsWith("arch", "architecture"));
+        System.out.println(startsWith("architecture", "rch"));
+        System.out.println(startsWith("architecture", "architecture"));
+
+        System.out.println("\nendsWith");
+        System.out.println(endsWith("astronomy", "nomy"));
+        System.out.println(endsWith("astronomy", "y"));
+        System.out.println(endsWith("astronomy", "nom"));
+        System.out.println(endsWith("nomy", "astronomy"));
+        System.out.println(endsWith("astronomy", "astronomy"));
+
+        System.out.println("\nremoveTag");
+        System.out.println(removeTag("<b>Hello World</b>", "b"));
+        System.out.println(removeTag("<b>Hello World</b>", "head"));
+        System.out.println(removeTag("Hello World</b>", "b"));
+        System.out.println(removeTag("<b>Hello World", "b"));
+
+        System.out.println(removeTag("</img>Hello World<img>", "img"));
+        System.out.println(removeTag("Happy Birthday <b>Hello World</b>", "b"));
+        System.out.println(removeTag("<title>Hello World</title> Happy Birthday",
+                "title"));
+        System.out.println(removeTag("Happy <b>Hello World</b> Birthday", "b"));
+
+
     }
 }
