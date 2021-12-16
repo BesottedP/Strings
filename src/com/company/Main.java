@@ -21,8 +21,7 @@ public class Main {
     public static String negative(String num){
         String reverse1 = num.replace("0", "h");
         String reverse2 = reverse1.replace("1", "0");
-        String reverse3 = reverse2.replace("h", "1");
-        return reverse3;
+        return reverse2.replace("h", "1");
     }
 
     public static String convertDate(String m){
@@ -35,11 +34,10 @@ public class Main {
 
     public static String convertDate2(String m){
 
-        String NewDate =  "";
+        String NewDate =  " ";
 
         int a = m.indexOf("/");
         int b = m.lastIndexOf("/");
-        int length = m.length();
 
         String month = m.substring(0,a);
         String day = m.substring(a+1,b);
@@ -51,8 +49,10 @@ public class Main {
             NewDate += "0" + day;
         }
         else{
-            NewDate = day;
+            NewDate += day;
         }
+
+        NewDate += "-";
 
         if(mlength == 1){
             NewDate += "0" + month;
@@ -60,6 +60,8 @@ public class Main {
         else{
             NewDate += month;
         }
+
+        NewDate += "-2014";
 
 
         return NewDate;
@@ -80,7 +82,7 @@ public class Main {
     public static boolean endsWith(String s, String suf){
         int l = s.length();
         for(int i = 0; i<=l; i++){
-            String t = s.substring(0+i,l);
+            String t = s.substring(i,l);
             if(t.equalsIgnoreCase(suf)){
                 return true;
             }
@@ -110,27 +112,27 @@ public class Main {
         System.out.println(scroll("happy"));
         System.out.println(scroll("h"));
 
-        System.out.println("");
+        System.out.println();
 
         System.out.println(convertName(" Reubenstein, Lori Renee "));
         System.out.println(convertName("Biden,Joe"));
         System.out.println(convertName("the Clown, Bozo"));
 
-        System.out.println("");
+        System.out.println();
 
         System.out.println(negative("0010111001"));
         System.out.println(negative("11111111"));
 
         System.out.println("04/20/2014 becomes " + convertDate("04/20/2014"));
 
-        System.out.println("");
+        System.out.println();
 
         System.out.println("04/20/2014 becomes" + convertDate2("04/20/2014"));
         System.out.println("4/20/2014 becomes" + convertDate2("4/20/2014"));
         System.out.println("04/2/2014 becomes" + convertDate2("04/2/2014"));
         System.out.println("4/2/2014 becomes" + convertDate2("4/2/2014"));
 
-        System.out.println(" ");
+        System.out.println();
 
         System.out.println("\nstartsWith");
         System.out.println(startsWith("architecture", "arch"));
@@ -161,3 +163,5 @@ public class Main {
 
     }
 }
+
+
