@@ -19,7 +19,7 @@ public class ErrorLog {
      */
     public boolean containsKey(String keyword) {
         if (description.contains(keyword)){
-            if (description.indexOf(keyword)==0)
+//            if (description.indexOf(keyword)==0)
         }
         return false;
     }
