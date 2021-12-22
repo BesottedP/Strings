@@ -10,7 +10,7 @@ public class ErrorLog {
         int EL = message.length();
         int colon = message.indexOf(":");
         machineId = message.substring(0,colon);
-        description = message.substring(colon+1,EL+1);
+        description = message.substring(colon+1,EL);
     }
 
     /** Returns true if the description in this error log entry
@@ -18,10 +18,26 @@ public class ErrorLog {
      * Postcondition: the description is unchanged
      */
     public boolean containsKey(String keyword) {
-        if (description.contains(keyword)){
-//            if (description.indexOf(keyword)==0)
+        if (description.contains(keyword) == false){
+            return false;
         }
-        return false;
+
+        int si = description.indexOf(keyword);
+        if (si == -1){
+            return false;
+        }
+        if(si > 0){
+            if(description.charAt(si-1) != ' '){
+                return false;
+            }
+        }
+        int ei = description.lastIndexOf(keyword) + keyword.length();
+        if (ei != description.length()){
+            if (description.charAt(ei) != ' '){
+                return false;
+            }
+        }
+        return true;
     }
 
     public String getMachineId() { return machineId;}

@@ -31,12 +31,12 @@ public class Sentence {
      */
     public void replaceNthTime(String str, int n, String repl) {
         int sb = findNthTime(str, n);
-            int end = currSent.length();
-            if(sb > 0){
+            if(sb >= 0){
                 String newcurrSent = "";
-                newcurrSent += currSent.substring(0, sb);
-                newcurrSent += repl;
-                newcurrSent += currSent.substring(sb + str.length());
+                String pref = currSent.substring(0, sb);
+                String mid = repl;
+                String suf = currSent.substring(sb + str.length());
+                newcurrSent = pref + mid + suf;
                 currSent = newcurrSent;
             }
         }
@@ -46,7 +46,15 @@ public class Sentence {
      * Postcondition: the current sentence is not modified.
      */
     public int findLastTime(String str) {
-        return 0;
+        int fix = -1;
+        int num = 1;
+        int find = findNthTime(str, num);
+        while (find != -1){
+            num++;
+            fix = find;
+            find = findNthTime(str, num);
+        }
+        return fix;
     }
 
     public static void main(String[] args) {
@@ -71,18 +79,17 @@ public class Sentence {
         System.out.println(sentence3);
 
         Sentence sentence4 = new Sentence("aaaa");
-        System.out.println(sentence4.findNthTime("aa", 1));
         sentence4.replaceNthTime("aa", 1, "xx");
         System.out.println(sentence4);
 
         Sentence sentence5 = new Sentence("aaaa");
         sentence5.replaceNthTime("aaa", 2, "bbb");
         System.out.println(sentence5);
-//
-//        Sentence sentence6 = new Sentence("A cat ate late.");
-//        System.out.println(sentence6.findLastTime("at"));
-//        System.out.println(sentence6.findLastTime("cat"));
-//        System.out.println(sentence6.findLastTime("bat"));
+
+        Sentence sentence6 = new Sentence("A cat ate late.");
+        System.out.println(sentence6.findLastTime("at"));
+        System.out.println(sentence6.findLastTime("cat"));
+        System.out.println(sentence6.findLastTime("bat"));
     }
 
 }
